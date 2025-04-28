@@ -1,0 +1,12 @@
+<div>
+  @if(error$ | async) {
+  <div>Error: {{ error$ | async }}</div>
+  } @else {
+  <div>
+    {{ info$ | async | json }}
+  </div>
+  <div>
+    {{ characters$ | async | json }}
+  </div>
+  }
+</div>
