@@ -64,3 +64,23 @@
     max-width: 50%;
   }
 }
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.clickable-row:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.alive {
+  color: green;
+}
+
+.dead {
+  color: red;
+}
+
+.unknown {
+  color: gray;
+}

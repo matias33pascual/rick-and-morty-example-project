@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { LayoutComponent } from './layout/layout.component';
+import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [LayoutComponent],
+  standalone: true,
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'Rick and Morty';
+  title = 'rickandmorty';
 }

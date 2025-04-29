@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #333;
+  color: white;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.favorites {
+  display: flex;
+  align-items: center;
+}
+
+.favorites-select {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #444;
+  color: white;
+  min-width: 200px;
+}
+
+.favorites-select option {
+  background-color: #444;
+  color: white;
+}

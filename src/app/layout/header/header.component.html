@@ -1,0 +1,15 @@
+<header class="header">
+  <div class="logo">
+    <h1>Rick and Morty</h1>
+  </div>
+  <div class="favorites">
+    <select [(ngModel)]="selectedFavorite" (change)="onFavoriteSelect(selectedFavorite!)" class="favorites-select">
+      <option [ngValue]="null">Select a favorite character</option>
+      @for (favorite of favorites$ | async; track favorite.id) {
+      <option [value]="favorite.id">
+        {{ favorite.name }}
+      </option>
+      }
+    </select>
+  </div>
+</header>

@@ -10,6 +10,7 @@ import { speciesReducer } from './core/species/store/species.reducer';
 import { SpeciesEffects } from './core/species/store/species.effects';
 import { typesReducer } from './core/types/store/types.reducer';
 import { TypesEffects } from './core/types/store/types.effects';
+import { favoritesReducer } from './core/favorites/store/favorites.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
       characters: charactersReducer,
       species: speciesReducer,
       types: typesReducer,
+      favorites: favoritesReducer,
     }),
     provideHttpClient(),
     provideEffects([CharactersEffects, SpeciesEffects, TypesEffects]),

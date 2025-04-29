@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Character, CharacterStatus } from '../../../core/characters/models/character.interface';
 import { Store } from '@ngrx/store';
@@ -16,9 +16,11 @@ import { loadCharacters, changePage } from '../../../core/characters/store/chara
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { addFavorite } from '../../../core/favorites/store/favorites.actions';
 
 @Component({
   selector: 'app-characters-table',
+  standalone: true,
   imports: [CommonModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatSelectModule],
   templateUrl: './characters-table.component.html',
   styleUrl: './characters-table.component.css',
@@ -35,6 +37,8 @@ export class CharactersTableComponent {
   displayedColumns: string[] = ['name', 'status', 'species', 'type', 'gender', 'created'];
 
   private store = inject(Store<CharactersState>);
+
+  @Input() characters: Character[] = [];
 
   constructor() {
     this.characters$ = this.store.select(selectCharacters);
@@ -57,5 +61,9 @@ export class CharactersTableComponent {
   applyStatusFilter(status: CharacterStatus | null) {
     this.statusFilter = status;
     this.store.dispatch(loadCharacters({ page: 1, filter: this.filter, status: this.statusFilter }));
+  }
+
+  onCharacterClick(character: Character) {
+    this.store.dispatch(addFavorite(character));
   }
 }
