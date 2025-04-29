@@ -25,5 +25,13 @@ export class CharactersService {
     return this.http.get<CharacterResponse>(url);
   }
 
-  
+  fetchAllCharacters(): Observable<CharacterResponse> {
+    return this.http
+      .get<CharacterResponse>(this.baseUrl)
+      .pipe(
+        expand((response: CharacterResponse) =>
+          response.info.next ? this.http.get<CharacterResponse>(response.info.next) : EMPTY,
+        ),
+      );
+  }
 }

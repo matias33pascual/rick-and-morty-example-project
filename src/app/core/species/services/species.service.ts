@@ -6,26 +6,15 @@ import { CharacterResponse } from '../../characters/models/character-response.in
 import { Observable } from 'rxjs';
 import { Character } from '../../characters/models/character.interface';
 import { SpeciesCount } from '../models/species-count.interface';
-
+import { CharactersService } from '../../characters/services/characters.service';
 @Injectable({
   providedIn: 'root',
 })
 export class SpeciesService {
-  private readonly baseUrl = 'https://rickandmortyapi.com/api/character';
-  private readonly http = inject(HttpClient);
-
-  private fetchAllCharacters(): Observable<CharacterResponse> {
-    return this.http
-      .get<CharacterResponse>(this.baseUrl)
-      .pipe(
-        expand((response: CharacterResponse) =>
-          response.info.next ? this.http.get<CharacterResponse>(response.info.next) : EMPTY,
-        ),
-      );
-  }
+  private readonly charactersService = inject(CharactersService);
 
   getSpeciesCount(): Observable<SpeciesCount[]> {
-    return this.fetchAllCharacters().pipe(
+    return this.charactersService.fetchAllCharacters().pipe(
       map((response: CharacterResponse) => response.results),
       reduce((allCharacters: Character[], pageCharacters: Character[]) => [...allCharacters, ...pageCharacters], []),
       map((characters: Character[]) => {
