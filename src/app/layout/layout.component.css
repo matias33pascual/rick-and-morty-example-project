@@ -13,16 +13,12 @@
 }
 
 .footer-container {
-  margin-top: 1rem;
   min-width: 670px;
+  margin-top: 2rem;
 }
 
 @media (max-width: 768px) {
   .content-container {
     padding: 0;
-  }
-
-  .footer-container {
-    padding: 0 0.5rem;
   }
 }
