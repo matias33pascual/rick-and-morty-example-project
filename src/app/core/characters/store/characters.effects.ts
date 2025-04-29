@@ -16,8 +16,8 @@ export class CharactersEffects {
   loadCharacters$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadCharacters),
-      switchMap(({ page }) =>
-        this.charactersService.getCharacters(page).pipe(
+      switchMap(({ page, filter, status }) =>
+        this.charactersService.getCharacters(page, filter, status).pipe(
           map((charactersResponse: CharacterResponse) =>
             loadCharactersSuccess({ characters: charactersResponse.results, info: charactersResponse.info }),
           ),

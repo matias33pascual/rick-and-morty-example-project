@@ -1,7 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { Character, CharactersActionTypes, CharacterResponseInfo } from '../models';
+import { Character, CharactersActionTypes, CharacterResponseInfo, CharacterStatus } from '../models';
 
-export const loadCharacters = createAction(CharactersActionTypes.LoadCharacters, props<{ page: number }>());
+export const loadCharacters = createAction(
+  CharactersActionTypes.LoadCharacters,
+  props<{ page: number; filter?: string; status?: CharacterStatus | null }>(),
+);
 
 export const loadCharactersSuccess = createAction(
   CharactersActionTypes.LoadCharactersSuccess,

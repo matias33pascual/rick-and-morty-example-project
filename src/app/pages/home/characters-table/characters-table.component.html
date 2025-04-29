@@ -12,6 +12,23 @@
     </mat-paginator>
   </div>
 
+  <div class="filters-container">
+    <mat-form-field>
+      <mat-label>Search by name</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Write a name" #input />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Search by status</mat-label>
+      <mat-select (selectionChange)="applyStatusFilter($event.value)" [value]="statusFilter">
+        <mat-option [value]="null">All</mat-option>
+        <mat-option [value]="CharacterStatus.Alive">Alive</mat-option>
+        <mat-option [value]="CharacterStatus.Dead">Dead</mat-option>
+        <mat-option [value]="CharacterStatus.Unknown">Unknown</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
   <table mat-table [dataSource]="(characters$ | async) || []">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
