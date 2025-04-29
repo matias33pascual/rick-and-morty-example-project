@@ -6,12 +6,15 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideEffects } from '@ngrx/effects';
 import { CharactersEffects } from './core/characters/store/characters.effects';
 import { charactersReducer } from './core/characters/store/characters.reducer';
+import { speciesReducer } from './core/species/store/species.reducer';
+import { SpeciesEffects } from './core/species/store/species.effects';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideStore({ characters: charactersReducer }),
+    provideStore({ characters: charactersReducer, species: speciesReducer }),
     provideHttpClient(),
-    provideEffects([CharactersEffects]),
+    provideEffects([CharactersEffects, SpeciesEffects]),
   ],
 };

@@ -1,0 +1,27 @@
+<div class="footer">
+  <div class="total-characters">
+    <div class="list-container">
+      <p>Total characters by Species</p>
+      <ul class="list">
+        @for (species of (speciesCount$ | async) ?? []; track species.species) {
+        <li>{{ species.species }}: {{ species.count }}</li>
+        }
+      </ul>
+    </div>
+    <div class="list-container">
+      <p>Total Characters by Type</p>
+      <ul class="list">
+        <li>Human: 100</li>
+        <li>Alien: 100</li>
+        <li>Humanoid: 100</li>
+        <li>Animal: 100</li>
+      </ul>
+    </div>
+  </div>
+  <a href="https://status.rickandmortyapi.com/" target="_blank" class="server-status-link">
+    <div class="server-status">
+      <p>Server Status</p>
+      <span class="status"></span>
+    </div>
+  </a>
+</div>
