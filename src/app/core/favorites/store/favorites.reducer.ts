@@ -4,12 +4,12 @@ import { addFavorite, removeFavorite } from './favorites.actions';
 
 export const favoritesReducer = createReducer(
   initialFavoritesState,
-  on(addFavorite, (state, { character }) => ({
+  on(addFavorite, (state, { payload }) => ({
     ...state,
-    favorites: [...state.favorites, character],
+    favorites: [...state.favorites, payload],
   })),
-  on(removeFavorite, (state, { characterId }) => ({
+  on(removeFavorite, (state, { payload }) => ({
     ...state,
-    favorites: state.favorites.filter((fav) => fav.id !== characterId),
+    favorites: state.favorites.filter((fav) => fav.id !== payload),
   })),
 );

@@ -1,69 +1,98 @@
-import { Component, inject, ViewChild, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { ViewChild } from '@angular/core';
 import { Character, CharacterStatus } from '../../../core/characters/models/character.interface';
+import { CharactersService } from '../../../core/characters/services/characters.service';
+import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import {
-  selectCharacters,
-  selectCharactersInfo,
-  selectCurrentPage,
-} from '../../../core/characters/store/characters.selectors';
-import { CharactersState } from '../../../core/characters/store/characters.state';
-import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { CharacterResponseInfo } from '../../../core/characters/models/character-response-info.interface';
-import { loadCharacters, changePage } from '../../../core/characters/store/characters.actions';
+import { selectFavorites } from '../../../core/favorites/store/favorites.selectors';
+import { addFavorite, removeFavorite } from '../../../core/favorites/store/favorites.actions';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { addFavorite } from '../../../core/favorites/store/favorites.actions';
+import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-characters-table',
-  standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatSelectModule],
   templateUrl: './characters-table.component.html',
-  styleUrl: './characters-table.component.css',
+  styleUrls: ['./characters-table.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+  ],
 })
-export class CharactersTableComponent {
-  characters$: Observable<Character[]>;
-  info$: Observable<CharacterResponseInfo>;
-  currentPage$: Observable<number>;
-
-  filter: string = '';
+export class CharactersTableComponent implements OnInit {
+  displayedColumns: string[] = ['favorite', 'name', 'status', 'species', 'type', 'gender', 'created'];
+  dataSource = new MatTableDataSource<Character>([]);
+  currentPage$ = new BehaviorSubject<number>(1);
   statusFilter: CharacterStatus | null = null;
-  CharacterStatus = CharacterStatus;
+  nameFilter = '';
+  info$ = new BehaviorSubject<{ count: number; pages: number }>({ count: 0, pages: 0 });
+  characters$: Observable<Character[]> = of([]);
+  favorites$: Observable<Character[]> = of([]);
 
-  displayedColumns: string[] = ['name', 'status', 'species', 'type', 'gender', 'created'];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  private store = inject(Store<CharactersState>);
+  constructor(private charactersService: CharactersService, private store: Store) {}
 
-  @Input() characters: Character[] = [];
+  ngOnInit(): void {
+    this.favorites$ = this.store.select(selectFavorites);
 
-  constructor() {
-    this.characters$ = this.store.select(selectCharacters);
-    this.info$ = this.store.select(selectCharactersInfo);
-    this.currentPage$ = this.store.select(selectCurrentPage);
+    this.characters$ = combineLatest([this.currentPage$, this.favorites$]).pipe(
+      switchMap(([page, favorites]) => {
+        return this.charactersService.getCharacters(page, this.nameFilter, this.statusFilter).pipe(
+          tap((response) => {
+            this.info$.next({
+              count: response.info.count,
+              pages: response.info.pages,
+            });
+          }),
+          map((response) => response.results),
+        );
+      }),
+    );
   }
 
-  onPageChange(event: PageEvent) {
-    const newPage = event.pageIndex + 1;
-    this.store.dispatch(changePage({ page: newPage }));
-    this.store.dispatch(loadCharacters({ page: newPage, filter: this.filter, status: this.statusFilter }));
+  onPageChange(event: PageEvent): void {
+    this.currentPage$.next(event.pageIndex + 1);
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.filter = filterValue;
-    this.store.dispatch(loadCharacters({ page: 1, filter: filterValue, status: this.statusFilter }));
+    this.nameFilter = filterValue.trim().toLowerCase();
+    this.currentPage$.next(1);
   }
 
-  applyStatusFilter(status: CharacterStatus | null) {
+  applyStatusFilter(status: CharacterStatus | null): void {
     this.statusFilter = status;
-    this.store.dispatch(loadCharacters({ page: 1, filter: this.filter, status: this.statusFilter }));
+    this.currentPage$.next(1);
   }
 
-  onCharacterClick(character: Character) {
-    this.store.dispatch(addFavorite(character));
+  isFavorite(character: Character, favorites: Character[] | null): boolean {
+    if (!favorites) return false;
+    return favorites.some((fav) => fav.id === character.id);
+  }
+
+  toggleFavorite(character: Character, isCurrentlyFavorite: boolean): void {
+    if (isCurrentlyFavorite) {
+      this.store.dispatch(removeFavorite(character.id));
+    } else {
+      this.store.dispatch(addFavorite(character));
+    }
   }
 }
