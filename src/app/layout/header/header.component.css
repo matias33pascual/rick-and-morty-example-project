@@ -1,11 +1,18 @@
 .header {
   display: flex;
+  flex-direction: row;
+  min-width: 670px;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 2rem;
+  padding: 1rem;
   background-color: #101414;
   color: white;
   margin-bottom: 2rem;
+  background: url('/assets/images/rick-and-morty-header.webp'), var(--primary-color);
+
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .logo h1 {
@@ -30,4 +37,18 @@
 .favorites-select option {
   background-color: #444;
   color: white;
+}
+
+.logo-image {
+  width: 20rem;
+}
+
+@media (max-width: 768px) {
+  .header {
+    background-size: cover;
+  }
+
+  .logo-image {
+    width: 10rem;
+  }
 }
