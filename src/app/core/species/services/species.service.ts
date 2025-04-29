@@ -26,6 +26,7 @@ export class SpeciesService {
         });
         return Array.from(speciesCountMap.entries()).map(([species, count]) => ({ species, count }));
       }),
+      map((speciesCount: SpeciesCount[]) => speciesCount.sort((a, b) => b.count - a.count)),
     );
   }
 }

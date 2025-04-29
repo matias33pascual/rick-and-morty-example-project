@@ -8,13 +8,19 @@ import { CharactersEffects } from './core/characters/store/characters.effects';
 import { charactersReducer } from './core/characters/store/characters.reducer';
 import { speciesReducer } from './core/species/store/species.reducer';
 import { SpeciesEffects } from './core/species/store/species.effects';
+import { typesReducer } from './core/types/store/types.reducer';
+import { TypesEffects } from './core/types/store/types.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideStore({ characters: charactersReducer, species: speciesReducer }),
+    provideStore({
+      characters: charactersReducer,
+      species: speciesReducer,
+      types: typesReducer,
+    }),
     provideHttpClient(),
-    provideEffects([CharactersEffects, SpeciesEffects]),
+    provideEffects([CharactersEffects, SpeciesEffects, TypesEffects]),
   ],
 };

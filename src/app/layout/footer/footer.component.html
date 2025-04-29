@@ -11,10 +11,9 @@
     <div class="list-container">
       <p>Total Characters by Type</p>
       <ul class="list">
-        <li>Human: 100</li>
-        <li>Alien: 100</li>
-        <li>Humanoid: 100</li>
-        <li>Animal: 100</li>
+        @for (type of (typesCount$ | async) ?? []; track type.type) {
+        <li>{{ type.type }}: {{ type.count }}</li>
+        }
       </ul>
     </div>
   </div>
