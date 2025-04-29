@@ -1,0 +1,30 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: black;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+}
+
+.content {
+  padding: 0 2rem;
+  margin-top: 4rem;
+}
+
+.footer-container {
+  margin-top: 1rem;
+  padding: 0 2rem;
+  min-width: 670px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 0;
+  }
+
+  .footer-container {
+    padding: 0 0.5rem;
+  }
+}
