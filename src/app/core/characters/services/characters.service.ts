@@ -1,7 +1,7 @@
-import { CharacterResponse } from '../models/character-response.interface';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
+import { CharacterResponse } from '../models/character-response.interface';
 
 @Injectable({
   providedIn: 'root',

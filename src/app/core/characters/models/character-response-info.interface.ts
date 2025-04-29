@@ -1,4 +1,4 @@
-export interface ResponseInfo {
+export interface CharacterResponseInfo {
   count: number;
   pages: number;
   next: string | null;

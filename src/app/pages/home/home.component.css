@@ -1,0 +1,12 @@
+.characters-table-container {
+  margin: 0 auto;
+  width: 95%;
+  min-width: 670px;
+}
+
+@media (max-width: 768px) {
+  .characters-table-container {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+}

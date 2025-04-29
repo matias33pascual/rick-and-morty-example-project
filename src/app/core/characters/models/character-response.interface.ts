@@ -1,7 +1,7 @@
 import { Character } from './character.interface';
-import { ResponseInfo } from './response-info.interface';
+import { CharacterResponseInfo } from './character-response-info.interface';
 
 export interface CharacterResponse {
-  info: ResponseInfo;
+  info: CharacterResponseInfo;
   results: Character[];
 }

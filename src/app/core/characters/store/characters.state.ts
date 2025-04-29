@@ -1,10 +1,11 @@
-import { Character, ResponseInfo } from '../models';
+import { Character, CharacterResponseInfo } from '../models';
 
 export interface CharactersState {
   characters: Character[];
-  info: ResponseInfo;
+  info: CharacterResponseInfo;
   loading: boolean;
   error: string | null;
+  currentPage: number;
 }
 
 export const initialState: CharactersState = {
@@ -17,4 +18,5 @@ export const initialState: CharactersState = {
   },
   loading: false,
   error: null,
+  currentPage: 1,
 };

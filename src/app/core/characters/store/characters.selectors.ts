@@ -7,3 +7,4 @@ export const selectCharacters = createSelector(selectCharactersState, (state: Ch
 export const selectCharactersInfo = createSelector(selectCharactersState, (state: CharactersState) => state.info);
 export const selectCharactersLoading = createSelector(selectCharactersState, (state: CharactersState) => state.loading);
 export const selectCharactersError = createSelector(selectCharactersState, (state: CharactersState) => state.error);
+export const selectCurrentPage = createSelector(selectCharactersState, (state: CharactersState) => state.currentPage);
