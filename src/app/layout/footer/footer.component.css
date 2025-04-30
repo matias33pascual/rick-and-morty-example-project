@@ -45,34 +45,19 @@
   font-size: 0.7rem;
 }
 
-.server-status {
+.api-link {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-.status::after {
-  content: '';
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background-color: #00ff00;
-  margin-left: 0.5rem;
-  border: 1px solid black;
-}
-
-.status.offline::after {
-  background-color: #ff0000;
-}
-
-.server-status-link {
+.api-link {
   text-decoration: none;
   color: white;
 }
 
-.server-status-link:hover {
+.api-link:hover {
   text-decoration: underline;
 }
 

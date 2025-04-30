@@ -1,10 +1,12 @@
 .layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   color: white;
   font-family: 'Roboto', sans-serif;
   padding: 0;
+  margin: 0 auto;
+  width: 95vw;
+  overflow: hidden;
 }
 
 .background-container {
@@ -13,7 +15,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 200%;
+  height: 180%;
   background-image: url('/assets/images/rick-and-morty-background.jpg');
   background-size: 50% 50%;
   background-position: center;
@@ -22,17 +24,8 @@
   filter: grayscale(100%) brightness(70%);
 }
 
-.content-container {
-  padding: 0 2rem;
-}
-
 .footer-container {
   min-width: 670px;
-  margin-top: 2rem;
-}
-
-@media (max-width: 768px) {
-  .content-container {
-    padding: 0;
-  }
+  margin: 0 auto;
+  width: 100%;
 }
