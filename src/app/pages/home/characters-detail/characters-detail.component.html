@@ -14,7 +14,12 @@
           <strong>Another resident of {{ character.location.name }} :</strong>
           {{ resident$ | async }}
         </p>
-        <!-- <p class="character-detail-description"><strong>Episodes:</strong> {{ character.episode.length }}</p> -->
+        <p class="character-detail-description">
+          <strong>First appearance:</strong> {{ character!.episode[0] || 'No episode' }}
+        </p>
+        <p class="character-detail-description">
+          <strong>Another character in episode:</strong> {{ episodeCharacter$ | async }}
+        </p>
       </div>
     </div>
   </div>

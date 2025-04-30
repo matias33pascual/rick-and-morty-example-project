@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { map, Observable, of } from 'rxjs';
 import { CharactersService } from '../../../core/characters/services/characters.service';
 import { LocationsService } from '../../../core/locations/services/locations.service';
+import { EpisodesService } from '../../../core/episodes/services/episodes.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -19,8 +20,10 @@ export class CharactersDetailComponent {
   @Output() close = new EventEmitter<void>();
 
   private locationsService = inject(LocationsService);
+  private episodesService = inject(EpisodesService);
 
   resident$!: Observable<string>;
+  episodeCharacter$!: Observable<string>;
 
   onClose(): void {
     this.close.emit();
@@ -30,15 +33,25 @@ export class CharactersDetailComponent {
     if (this.character?.location.url) {
       this.getLocationResident(this.character?.location.url);
     }
+    if (this.character?.episode[0]) {
+      this.getEpisodeCharacter(this.character?.episode[0]);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['character'] && this.character?.location.url) {
       this.getLocationResident(this.character?.location.url);
     }
+    if (changes['character'] && this.character?.episode[0]) {
+      this.getEpisodeCharacter(this.character?.episode[0]);
+    }
   }
 
   getLocationResident(url: string): void {
-    this.resident$ = this.locationsService.getResidentsFromLocationUrl(url).pipe(map((residents) => residents));
+    this.resident$ = this.locationsService.getResidentsFromLocationUrl(url);
+  }
+
+  getEpisodeCharacter(url: string): void {
+    this.episodeCharacter$ = this.episodesService.getCharactersFromEpisodeUrl(url);
   }
 }
