@@ -8,6 +8,7 @@ import { CharactersService } from '../../../core/characters/services/characters.
 import { LocationsService } from '../../../core/locations/services/locations.service';
 import { EpisodesService } from '../../../core/episodes/services/episodes.service';
 import { CommonModule } from '@angular/common';
+import { EpisodeResponse } from '../../../core/episodes/interfaces/episode-response.interface';
 
 @Component({
   selector: 'app-characters-detail',
@@ -24,6 +25,7 @@ export class CharactersDetailComponent {
 
   resident$!: Observable<string>;
   episodeCharacter$!: Observable<string>;
+  episodeInfo$!: Observable<EpisodeResponse>;
 
   onClose(): void {
     this.close.emit();
@@ -35,6 +37,7 @@ export class CharactersDetailComponent {
     }
     if (this.character?.episode[0]) {
       this.getEpisodeCharacter(this.character?.episode[0]);
+      this.getEpisodeInfo(this.character?.episode[0]);
     }
   }
 
@@ -44,6 +47,7 @@ export class CharactersDetailComponent {
     }
     if (changes['character'] && this.character?.episode[0]) {
       this.getEpisodeCharacter(this.character?.episode[0]);
+      this.getEpisodeInfo(this.character?.episode[0]);
     }
   }
 
@@ -53,5 +57,9 @@ export class CharactersDetailComponent {
 
   getEpisodeCharacter(url: string): void {
     this.episodeCharacter$ = this.episodesService.getCharactersFromEpisodeUrl(url);
+  }
+
+  getEpisodeInfo(url: string): void {
+    this.episodeInfo$ = this.episodesService.getEpisodeInfo(url);
   }
 }

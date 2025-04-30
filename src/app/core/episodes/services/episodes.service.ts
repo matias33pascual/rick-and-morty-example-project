@@ -12,13 +12,18 @@ export class EpisodesService {
 
   constructor() {}
 
+  getEpisodeInfo(url: string): Observable<EpisodeResponse> {
+    return this.http.get<EpisodeResponse>(url);
+  }
+
   getCharactersFromEpisodeUrl(url: string): Observable<string> {
     return this.http.get<EpisodeResponse>(url).pipe(
       switchMap((response) => {
         if (response.characters.length === 0) {
           return of('No characters in this episode');
         }
-        return this.getCharacterFromUrl(response.characters[0]).pipe(map((character) => character.name));
+        const randomIndex = Math.floor(Math.random() * response.characters.length);
+        return this.getCharacterFromUrl(response.characters[randomIndex]).pipe(map((character) => character.name));
       }),
     );
   }
