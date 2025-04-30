@@ -1,6 +1,6 @@
 .character-detail-container {
   position: fixed;
-  top: 18rem;
+  bottom: 4rem;
   right: -2rem;
   width: 40rem;
   z-index: 100;
