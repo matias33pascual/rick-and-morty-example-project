@@ -16,7 +16,6 @@ import { take } from 'rxjs';
 })
 export class HeaderComponent {
   private store = inject(Store);
-  private router = inject(Router);
 
   @Output() favoriteSelected = new EventEmitter<Character>();
 
