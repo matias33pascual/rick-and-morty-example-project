@@ -54,11 +54,7 @@
 // //   episode: string[];
 // // }
 
-// export interface Location extends ResourceBase {
-//   type: string;
-//   dimension: string;
-//   residents: string[];
-// }
+
 
 // export interface Episode extends ResourceBase {
 //   air_date: string;

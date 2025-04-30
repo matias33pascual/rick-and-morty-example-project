@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, map, switchMap, of } from 'rxjs';
 import { Character } from '../../characters/models';
+import { LocationResponse } from '../interfaces/location-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +12,13 @@ export class LocationsService {
 
   constructor() {}
 
-  getResidentsFromLocationUrl(url: string): Observable<Character[]> {
-    return this.http.get<string[]>(url).pipe(
-      switchMap((residents) => {
-        if (residents.length === 0) {
-          return of([]);
+  getResidentsFromLocationUrl(url: string): Observable<string> {
+    return this.http.get<LocationResponse>(url).pipe(
+      switchMap((response) => {
+        if (response.residents.length === 0) {
+          return of('No known residents');
         }
-        return this.getCharacterFromUrl(residents[0]).pipe(map((character) => [character]));
+        return this.getCharacterFromUrl(response.residents[0]).pipe(map((character) => character.name));
       }),
     );
   }

@@ -8,7 +8,13 @@
       <img [src]="character.image" alt="character-image" class="character-detail-image" />
       <div class="character-detail-info">
         <h3 class="character-detail-name">{{ character.name }}</h3>
-        <p class="character-detail-description">Description</p>
+        <p class="character-detail-description"><strong>Origin:</strong> {{ character.origin.name }}</p>
+        <p class="character-detail-description"><strong>Location:</strong> {{ character.location.name }}</p>
+        <p class="character-detail-description">
+          <strong>Another resident of {{ character.location.name }} :</strong>
+          {{ resident$ | async }}
+        </p>
+        <!-- <p class="character-detail-description"><strong>Episodes:</strong> {{ character.episode.length }}</p> -->
       </div>
     </div>
   </div>
