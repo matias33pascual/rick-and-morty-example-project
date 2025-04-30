@@ -1,4 +1,4 @@
 <div class="characters-container">
   <app-characters-detail [character]="selectedCharacter" (close)="selectedCharacter = null"></app-characters-detail>
-  <app-characters-table (characterSelected)="onCharacterSelected($event)"></app-characters-table>
+  <app-characters-table (characterSelected)="onCharacterSelected($event.id)"></app-characters-table>
 </div>

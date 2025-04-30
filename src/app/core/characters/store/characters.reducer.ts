@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Character, CharacterResponseInfo } from '../models';
-import { loadCharacters, loadCharactersSuccess, loadCharactersFailure, changePage } from './characters.actions';
+import { loadCharacters, loadCharactersSuccess, loadCharactersFailure, changePage, loadCharacterByIdSuccess, loadCharacterByIdFailure } from './characters.actions';
 import { initialState } from './characters.state';
 import { CharactersState } from './characters.state';
 
@@ -33,5 +33,18 @@ export const charactersReducer = createReducer(
   on(changePage, (state: CharactersState, { page }) => ({
     ...state,
     currentPage: page,
+  })),
+
+  
+
+  on(loadCharacterByIdSuccess, (state: CharactersState, { character }: { character: Character }) => ({
+    ...state,
+    character,
+  })),
+
+  on(loadCharacterByIdFailure, (state: CharactersState, { error }: { error: string }) => ({
+    ...state,
+    loading: false,
+    error: error,
   })),
 );

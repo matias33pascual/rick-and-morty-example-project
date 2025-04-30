@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { EMPTY, expand, map, Observable } from 'rxjs';
+import { catchError, EMPTY, expand, map, Observable } from 'rxjs';
 import { CharacterResponse } from '../models/character-response.interface';
 import { Character, CharacterStatus } from '../models/character.interface';
 
@@ -33,5 +33,17 @@ export class CharactersService {
           response.info.next ? this.http.get<CharacterResponse>(response.info.next) : EMPTY,
         ),
       );
+  }
+
+  getCharacterById(id: number): Observable<Character> {
+    console.log('getCharacterById', id);
+
+    return this.http.get<Character>(`${this.baseUrl}/${id}`).pipe(
+      map((character) => character),
+      catchError((error) => {
+        console.error('Error loading character:', error);
+        return EMPTY;
+      }),
+    );
   }
 }

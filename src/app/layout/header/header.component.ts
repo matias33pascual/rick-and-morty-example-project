@@ -3,9 +3,6 @@ import { Store } from '@ngrx/store';
 import { selectFavorites } from '../../core/favorites/store/favorites.selectors';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Character } from '../../core/characters/models';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -17,15 +14,12 @@ import { take } from 'rxjs';
 export class HeaderComponent {
   private store = inject(Store);
 
-  @Output() favoriteSelected = new EventEmitter<Character>();
+  @Output() favoriteSelected = new EventEmitter<number>();
 
   favorites$ = this.store.select(selectFavorites);
   selectedFavorite: number | null = null;
 
   onFavoriteSelect(characterId: number) {
-    this.favorites$.pipe(take(1)).subscribe((favorites) => {
-      const character = favorites[characterId];
-      this.favoriteSelected.emit(character);
-    });
+    this.favoriteSelected.emit(characterId);
   }
 }

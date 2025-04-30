@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CharacterResponseInfo } from '../../core/characters/models';
 import { Observable } from 'rxjs';
-import { loadCharacters } from '../../core/characters/store/characters.actions';
+import { loadCharacters, loadCharacterById } from '../../core/characters/store/characters.actions';
 import { Store } from '@ngrx/store';
 import { CharactersState } from '../../core/characters/store/characters.state';
 import { Character } from '../../core/characters/models';
@@ -13,6 +13,7 @@ import {
 } from '../../core/characters/store/characters.selectors';
 import { CharactersTableComponent } from './characters-table/characters-table.component';
 import { CharactersDetailComponent } from './characters-detail/characters-detail.component';
+import { CharactersService } from '../../core/characters/services/characters.service';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ export class HomeComponent {
   selectedCharacter: Character | null = null;
 
   private store = inject(Store<CharactersState>);
+  private charactersService = inject(CharactersService);
 
   constructor() {
     this.characters$ = this.store.select(selectCharacters);
@@ -40,7 +42,15 @@ export class HomeComponent {
     this.store.dispatch(loadCharacters({ page: 1 }));
   }
 
-  onCharacterSelected(character: Character): void {
-    this.selectedCharacter = character;
+  onCharacterSelected(characterId: number): void {
+    this.charactersService.getCharacterById(characterId).subscribe({
+      next: (character) => {
+        this.selectedCharacter = character;
+      },
+      error: (error) => {
+        console.error('Error loading character:', error);
+        this.selectedCharacter = null;
+      },
+    });
   }
 }

@@ -17,3 +17,15 @@ export const loadCharactersFailure = createAction(
 );
 
 export const changePage = createAction(CharactersActionTypes.ChangePage, props<{ page: number }>());
+
+export const loadCharacterById = createAction(CharactersActionTypes.LoadCharacterById, props<{ id: number }>());
+
+export const loadCharacterByIdSuccess = createAction(
+  CharactersActionTypes.LoadCharacterByIdSuccess,
+  props<{ character: Character }>(),
+);
+
+export const loadCharacterByIdFailure = createAction(
+  CharactersActionTypes.LoadCharacterByIdFailure,
+  props<{ error: string }>(),
+);
