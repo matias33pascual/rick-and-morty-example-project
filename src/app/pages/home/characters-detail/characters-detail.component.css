@@ -1,19 +1,14 @@
 .character-detail-container {
   position: fixed;
-  top: 12rem;
-  right: -1rem;
-  min-height: 30rem;
-  max-height: 50rem;
-  width: 40vw;
-  z-index: 10;
-  background-color: var(--primary-color);
-  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  opacity: 1;
+  top: 18rem;
+  right: -2rem;
+  width: 40rem;
+  z-index: 100;
 }
 
-.character-detail{
+.character-detail {
   padding: 0.5rem;
+  margin-left: 1rem;
 }
 
 .character-detail-content {
@@ -22,7 +17,6 @@
   align-items: start;
   justify-content: start;
   background-color: #333;
-  padding: 0 2rem;
 }
 
 .character-detail-image {
@@ -38,6 +32,7 @@
   align-items: start;
   justify-content: start;
   padding: 1rem;
+  width: 100%;
 }
 
 .character-detail::after {
@@ -51,4 +46,8 @@
   background-color: #333;
   border-radius: 10px;
   z-index: -1;
+}
+
+.episode-info {
+  padding-left: 0.2rem;
 }
