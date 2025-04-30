@@ -1,11 +1,11 @@
 <div class="footer">
   <a href="https://rickandmortyapi.com/" target="_blank" class="api-link">
-    <p>Rick and Morty API</p>
+    <p>{{ 'Rick and Morty API' | uppercase }}</p>
   </a>
 
   <div class="total-characters">
     <div class="list-container">
-      <p>Total characters by Species</p>
+      <p>{{ 'Total characters by Species' | uppercase }}</p>
       <ul class="list">
         @for (species of (speciesCount$ | async) ?? []; track species.species) {
         <li>{{ species.species }}: {{ species.count }}</li>
@@ -13,7 +13,7 @@
       </ul>
     </div>
     <div class="list-container">
-      <p>Total Characters by Type</p>
+      <p>{{ 'Total Characters by Type' | uppercase }}</p>
       <ul class="list">
         @for (type of (typesCount$ | async) ?? []; track type.type) {
         <li>{{ type.type }}: {{ type.count }}</li>

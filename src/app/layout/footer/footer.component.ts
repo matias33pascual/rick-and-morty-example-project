@@ -5,10 +5,12 @@ import { selectSpeciesCount } from '../../core/species/store/species.selectors';
 import { loadTypes } from '../../core/types/store/types.actions';
 import { selectTypes } from '../../core/types/store/types.selectors';
 import { CommonModule } from '@angular/common';
+import { UpperCasePipe } from '../../core/pipes/small-caps.pipe';
 
 @Component({
   selector: 'app-footer',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, UpperCasePipe],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css',
 })
