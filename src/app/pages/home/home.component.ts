@@ -43,6 +43,11 @@ export class HomeComponent {
   }
 
   onCharacterSelected(characterId: number): void {
+    if (this.selectedCharacter?.id === characterId) {
+      this.selectedCharacter = null;
+      return;
+    }
+
     this.charactersService.getCharacterById(characterId).subscribe({
       next: (character) => {
         this.selectedCharacter = character;

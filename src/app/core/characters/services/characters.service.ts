@@ -36,8 +36,6 @@ export class CharactersService {
   }
 
   getCharacterById(id: number): Observable<Character> {
-    console.log('getCharacterById', id);
-
     return this.http.get<Character>(`${this.baseUrl}/${id}`).pipe(
       map((character) => character),
       catchError((error) => {
