@@ -50,15 +50,17 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-
-.api-link {
+  color: #97ce4c;
   text-decoration: none;
-  color: white;
+  font-size: 1.5rem;
 }
 
 .api-link:hover {
   text-decoration: underline;
+}
+
+.api-link:visited {
+  text-decoration: none;
 }
 
 .created-by {
