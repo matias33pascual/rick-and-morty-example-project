@@ -1,31 +1,38 @@
-.characters-detail-container {
+.character-detail-container {
   position: fixed;
   top: 12rem;
   right: -1rem;
   min-height: 30rem;
   max-height: 50rem;
-  width: 30vw;
+  width: 40vw;
   z-index: 10;
-  background-color: transparent;
+  background-color: var(--primary-color);
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5);
   border-radius: 8px;
+  opacity: 1;
 }
 
-.characters-detail-drawer-content {
+.character-detail{
+  padding: 0.5rem;
+}
+
+.character-detail-content {
   display: flex;
   flex-direction: row;
   align-items: start;
   justify-content: start;
+  background-color: #333;
+  padding: 0 2rem;
 }
 
-.characters-detail-drawer-image {
+.character-detail-image {
   width: 20rem;
   height: 20rem;
   object-fit: cover;
   border-radius: 10px;
 }
 
-.characters-detail-drawer-info {
+.character-detail-info {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -33,14 +40,7 @@
   padding: 1rem;
 }
 
-.characters-detail-drawer {
-  background-color: var(--primary-color);
-  padding: 1rem;
-  width: 100%;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-}
-
-.characters-detail-drawer::after {
+.character-detail::after {
   content: '';
   position: absolute;
   top: 50%;

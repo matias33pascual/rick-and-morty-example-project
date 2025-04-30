@@ -1,13 +1,16 @@
-<mat-drawer-container class="characters-detail-container">
-  <mat-drawer mode="side" opened position="end" class="characters-detail-drawer">
-    <div class="characters-detail-drawer-content">
-      @if (character) {
-      <img [src]="character.image" alt="character-image" class="characters-detail-drawer-image" />
-      <div class="characters-detail-drawer-info">
-        <h3 class="characters-detail-drawer-name">{{ character.name }}</h3>
-        <p class="characters-detail-drawer-description">Description</p>
+@if (character) {
+<div class="character-detail-container">
+  <div class="character-detail">
+    <button mat-icon-button class="close-button" (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <div class="character-detail-content">
+      <img [src]="character.image" alt="character-image" class="character-detail-image" />
+      <div class="character-detail-info">
+        <h3 class="character-detail-name">{{ character.name }}</h3>
+        <p class="character-detail-description">Description</p>
       </div>
-      }
     </div>
-  </mat-drawer>
-</mat-drawer-container>
+  </div>
+</div>
+}
