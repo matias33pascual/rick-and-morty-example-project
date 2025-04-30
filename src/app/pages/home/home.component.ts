@@ -12,7 +12,7 @@ import {
   selectCharactersInfo,
 } from '../../core/characters/store/characters.selectors';
 import { CharactersTableComponent } from './characters-table/characters-table.component';
-import { CharactersDetailComponent } from "./characters-detail/characters-detail.component";
+import { CharactersDetailComponent } from './characters-detail/characters-detail.component';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +25,7 @@ export class HomeComponent {
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
   info$: Observable<CharacterResponseInfo>;
+  selectedCharacter: Character | null = null;
 
   private store = inject(Store<CharactersState>);
 
@@ -37,5 +38,9 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.store.dispatch(loadCharacters({ page: 1 }));
+  }
+
+  onCharacterSelected(character: Character): void {
+    this.selectedCharacter = character;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ViewChild } from '@angular/core';
@@ -37,6 +37,8 @@ import { FormsModule } from '@angular/forms';
   ],
 })
 export class CharactersTableComponent implements OnInit {
+  @Output() characterSelected = new EventEmitter<Character>();
+
   displayedColumns: string[] = ['favorite', 'name', 'status', 'species', 'type', 'gender', 'created'];
   dataSource = new MatTableDataSource<Character>([]);
   currentPage$ = new BehaviorSubject<number>(1);
@@ -94,5 +96,13 @@ export class CharactersTableComponent implements OnInit {
     } else {
       this.store.dispatch(addFavorite(character));
     }
+  }
+
+  selectCharacter(character: Character): void {
+    this.characterSelected.emit(character);
+  }
+
+  onCharacterSelected(character: Character): void {
+    this.selectCharacter(character);
   }
 }

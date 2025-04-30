@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { Character } from '../../../core/characters/models/character.interface';
 
 @Component({
   selector: 'app-characters-detail',
@@ -7,4 +8,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   templateUrl: './characters-detail.component.html',
   styleUrl: './characters-detail.component.css',
 })
-export class CharactersDetailComponent {}
+export class CharactersDetailComponent {
+  @Input() character: Character | null = null;
+}
