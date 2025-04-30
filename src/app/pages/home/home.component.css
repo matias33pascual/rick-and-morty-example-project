@@ -1,7 +1,8 @@
-.characters-table-container {
+.characters-container {
   margin: 0 auto;
   padding: 0 2rem;
   min-width: 670px;
+  position: relative;
 }
 
 @media (max-width: 768px) {

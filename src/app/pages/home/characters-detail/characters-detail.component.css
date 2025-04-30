@@ -1,0 +1,19 @@
+.characters-detail-container {
+  position: fixed;
+  top: 12rem;
+  right: -1rem;
+  min-height: 30rem;
+  max-height: 50rem;
+  width: 40vw;
+  z-index: 10;
+  background-color: transparent;
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+.characters-detail-drawer {
+  background-color: var(--primary-color);
+  padding: 1rem;
+  width: 100%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}

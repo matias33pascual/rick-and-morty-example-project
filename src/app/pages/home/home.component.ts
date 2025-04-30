@@ -12,10 +12,11 @@ import {
   selectCharactersInfo,
 } from '../../core/characters/store/characters.selectors';
 import { CharactersTableComponent } from './characters-table/characters-table.component';
+import { CharactersDetailComponent } from "./characters-detail/characters-detail.component";
 
 @Component({
   selector: 'app-home',
-  imports: [CharactersTableComponent],
+  imports: [CharactersTableComponent, CharactersDetailComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
