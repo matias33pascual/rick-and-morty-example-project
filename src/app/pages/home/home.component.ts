@@ -41,6 +41,7 @@ export class HomeComponent {
   }
 
   onCharacterSelected(character: Character): void {
+    console.log(character);
     this.selectedCharacter = character;
   }
 }
