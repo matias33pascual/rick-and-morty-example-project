@@ -1,4 +1,6 @@
-# Rick and Morty
+# Rick and Morty Example Project
 
-- Utiliza la API de [The Rick and Morty API](https://rickandmortyapi.com/)
-- Utiliza [NgRx](https://ngrx.io) para el manejo de estados
+Example project usign Rick and Morty API with Redux Pattern in Angular
+
+- Use the [The Rick and Morty API](https://rickandmortyapi.com/)
+- Use [NgRx](https://ngrx.io) for state management
